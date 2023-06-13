@@ -64,7 +64,8 @@ void display(queue* q) {
     }
 
     printf("Queue:\t");
-    if (q->front > q->rear) {
+    
+    /*if (q->front > q->rear) {
         for(int i=q->front; i < size; i++) {
             printf("%d\t", q->data[i]);
         }
@@ -77,6 +78,12 @@ void display(queue* q) {
             printf("%d\t", q->data[i]);
         }
     }
+    printf("\n");*/
+    int i = q->front;
+    do {
+        printf("%d\t", q->data[i]);
+        i = (i + 1) % size;
+    } while (i != (q->rear + 1) % size);
     printf("\n");
 }
 

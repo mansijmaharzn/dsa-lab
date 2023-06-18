@@ -53,6 +53,12 @@ void dequeue(queue* q) {
         int val = q->data[q->front];
         q->front = (q->front + 1) % size;
         printf("Dequeued value: %d\n", val);
+
+        if (q->front == (q->rear + 1) % size) {
+            // Queue is now empty, reset front and rear
+            q->front = -1;
+            q->rear = -1;
+        }
     }
 }
 

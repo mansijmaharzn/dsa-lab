@@ -82,7 +82,7 @@ void insertAtRandom(int val, int pos) {
     newNode->next = temp->next;
     newNode->data = val;
     temp->next = newNode;
-    printf("Deleted %d at position %d!\n", val, pos);
+    printf("Inserted %d at position %d!\n", val, pos);
 }
 // insert operations
 

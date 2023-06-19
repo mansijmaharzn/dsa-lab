@@ -182,11 +182,6 @@ void display() {
 int main() {
     int firstChoice, secondChoice, value, position;
 
-    insertAtEnd(1);
-    insertAtEnd(2);
-    insertAtEnd(3);
-    insertAtEnd(4);
-
     do {
         printf("1. Insert\t2. Delete\t3. Display\t4. Exit\n> ");
         scanf("%d", &firstChoice);

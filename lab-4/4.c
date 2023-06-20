@@ -1,4 +1,4 @@
-// calculate gcd of two numnum2ers
+// calculate gcd of two numbers
 #include<stdio.h>
 
 

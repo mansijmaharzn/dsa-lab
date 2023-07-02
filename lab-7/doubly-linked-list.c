@@ -1,4 +1,3 @@
-// problem in delete at random
 #include<stdio.h>
 #include<stdlib.h>
 

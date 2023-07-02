@@ -1,102 +1,99 @@
+// problem in delete at random
 #include<stdio.h>
 #include<stdlib.h>
 
 
 struct NODE {
+    struct NODE* prev;
     int data;
-    struct NODE* next; // self-refrencing
+    struct NODE* next;
 };
 
 
 typedef struct NODE node;
-node* head = NULL; // initializing head
+
+node* head = NULL;
 
 
 // insert operations
 void insertAtBeginning(int val) {
     node* newNode;
     newNode = (node*)malloc(sizeof(node));
-    if(newNode == NULL) {
-        printf("Failed to allocate memory!");
+
+    if (newNode == NULL) {
+        printf("Error allocating memory!\n");
         return;
     }
 
-    if (head==NULL) {
-        newNode->next = newNode;
+    if (head == NULL) {
+        newNode->prev = newNode->next = NULL;
+        head = newNode;
     } else {
-        node* tempNode = head;
-
-        while(tempNode->next != head) {
-            tempNode = tempNode->next;
-        }
-
-        tempNode->next = newNode;
         newNode->next = head;
+        head->prev = newNode;
+        newNode->prev = NULL;
+        head = newNode;
     }
 
     newNode->data = val;
-    head = newNode;
-
     printf("Inserted %d at beginning!\n", val);
 }
 
 
 void insertAtEnd(int val) {
-    node* newNode;
+    node *newNode;
     newNode = (node*)malloc(sizeof(node));
     if (newNode == NULL) {
-        printf("Failed to allocate memory!");
+        printf("Error allocating memory!\n");
         return;
     }
 
     if (head == NULL) {
+        newNode->prev = newNode->next = NULL;
         head = newNode;
     } else {
-        node* temp = head;
-        while(temp->next != head) {
+        node *temp = head;
+        while(temp->next != NULL) {
             temp = temp->next;
         }
         temp->next = newNode;
+        newNode->prev = temp;
+        newNode->next = NULL;
     }
 
     newNode->data = val;
-    newNode->next = head;
     printf("Inserted %d at end!\n", val);
 }
 
 
 void insertAtRandom(int val, int pos) {
-    if (pos == 0) {
-        insertAtBeginning(val);
-        return;
-    }
-
     node *newNode;
     newNode = (node*)malloc(sizeof(node));
-
-    if(newNode == NULL) {
-        printf("Failed to allocate memory!");
+    if (newNode == NULL) {
+        printf("Error allocating memory!\n");
         return;
     }
 
     if (head == NULL) {
-        newNode->next = newNode;
+        newNode->prev = newNode->next = NULL;
         head = newNode;
     } else {
         node* temp = head;
-        for(int i=0; i<=pos-2; i++) {
+        for (int i=0; i<=pos-2; i++) {
             temp = temp->next;
-            if(temp == head) {
+            if(temp == NULL) {
                 printf("Oops! Invalid Position!\n");
                 return;
             }
         }
+        newNode->prev = temp;
         newNode->next = temp->next;
         temp->next = newNode;
+        newNode->next->prev = newNode;
     }
 
     newNode->data = val;
-    printf("Inserted %d at position %d!\n", val, pos);
+    printf("Inserted %d at %d!\n", val, pos);
 }
 // insert operations
 
@@ -104,106 +101,102 @@ void insertAtRandom(int val, int pos) {
 // delete operations
 void deleteAtBeginning() {
     if (head == NULL) {
-        printf("List is Empty!\n");
-        return;
-    }
-
-    node* deleteNode = head;
-    node* tempNode = head;
-
-    while(tempNode->next != head) {
-        tempNode = tempNode->next;
-    }
-    tempNode->next = deleteNode->next;
-    head = deleteNode->next;
-    int val = deleteNode->data;
-    free(deleteNode);
-
-    printf("Deleted %d at beginning!\n", val);
-}
-
-
-void deleteAtEnd() {
-    if (head == NULL) {
-        printf("List is Empty!\n");
+        printf("List is empty!\n");
         return;
     }
 
     node* deleteNode;
     int val;
-    if (head->next == head) { // if the list has only one node
+    if (head->next == NULL) {
         deleteNode = head;
+        head = NULL;
         val = deleteNode->data;
-        head == NULL; // now the list is empty
-        free(deleteNode);
     } else {
-        node* temp = head;
-
-        while(temp->next->next != head) {
-            temp = temp->next;
-        }
-
-        deleteNode = temp->next;
+        deleteNode = head;
+        head = deleteNode->next;
+        head->prev = NULL;
         val = deleteNode->data;
-        temp->next = head;
-        free(deleteNode);
+        
     }
 
-    printf("Deleted %d at end!\n", val);
+    free(deleteNode);
+    printf("Deleted %d from beginning!\n", val);
+}
+
+
+void deleteAtEnd() {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    node* deleteNode;
+    int val;
+    if (head->next == NULL) {
+        deleteNode = head;
+        head = NULL;
+        val = deleteNode->data;
+    } else {
+        deleteNode = head;
+        while(deleteNode->next != NULL) {
+            deleteNode = deleteNode->next;
+        }
+        deleteNode->prev->next = NULL;
+        val = deleteNode->data;
+    }
+
+    free(deleteNode);
+    printf("Deleted %d from end!\n", val);
 }
 
 
 void deleteAtRandom(int pos) {
-    if (pos == 0) {
-        deleteAtBeginning();
-        return;
-    }
-
     if (head == NULL) {
-        printf("List is Empty!\n");
+        printf("List is empty!\n");
         return;
     }
 
+    node* deleteNode;
     int val;
-    node* deleteNode = head;
-    if (head->next == head) {
-        val = deleteNode->data; 
+    if (head->next == NULL) {
+        deleteNode = head;
         head = NULL;
-        free(deleteNode);
+        val = deleteNode->data;
     } else {
-        node* temp = head;
-        for(int i=0; i < pos; i++) {
-            temp = deleteNode;
+        deleteNode = head;
+        for (int i=0; i < pos; i++) {
             deleteNode = deleteNode->next;
-            if(deleteNode == head) {
+            if (deleteNode == NULL) {
                 printf("Oops! Invalid Position!\n");
                 return;
             }
         }
-        temp->next = deleteNode->next;
+
+        deleteNode->next->prev = deleteNode->prev;
+        deleteNode->prev->next = deleteNode->next;
         val = deleteNode->data;
-        free(deleteNode);
     }
 
-    printf("Deleted %d at position %d!\n", val, pos);
+    free(deleteNode);
+    printf("Deleted %d from %d!\n", val, pos);
 }
 // delete operations
 
+
 void display() {
-    if (head==NULL) {
-        printf("List is Empty!\n");
+    if (head == NULL) {
+        printf("List is empty!\n");
         return;
     }
 
-    node* temp;
-    temp = head;
+    node* temp = head;
 
-    printf("List contents:\t");
-    while(temp->next != head) {
+    printf("List:\t");
+    while(temp->next != NULL) {
         printf("%d\t", temp->data);
         temp = temp->next;
     }
-    printf("%d\n", temp->data); // printing the last data
+    printf("%d\n", temp->data);
 }
 
 
@@ -271,6 +264,6 @@ int main() {
                 break;
         }
     } while(firstChoice != 4);
-    
+
     return 0;
 }

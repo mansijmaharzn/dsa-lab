@@ -74,7 +74,7 @@ void insertAtRandom(int val, int pos) {
             temp = temp->next;
             if(temp == NULL) {
                 printf("Oops! Invalid Position!\n");
-                break;
+                return;
             }
         }
     }
@@ -150,7 +150,7 @@ void deleteAtRandom(int pos) {
         deleteNode = deleteNode->next;
         if(deleteNode == NULL) {
             printf("Oops! Invalid Position!\n");
-            break;
+            return;
         }
     }
 

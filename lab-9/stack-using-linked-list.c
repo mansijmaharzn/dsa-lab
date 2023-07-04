@@ -24,7 +24,6 @@ void push(int val) {
     if (top == NULL) {
         top = newNode;
         newNode->next = NULL;
-        // print
     } else {
         newNode->next = top;
         top = newNode;

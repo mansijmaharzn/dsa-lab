@@ -2,7 +2,7 @@
 
 ### Downloading
 ```
-git clone https://github.com/mansijmaharzn/cpp-lab
+git clone https://github.com/mansijmaharzn/dsa-lab
 ```
 
 ### Updating

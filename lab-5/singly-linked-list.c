@@ -157,7 +157,7 @@ void deleteAtRandom(int pos) {
     temp->next = deleteNode->next;
     int val = deleteNode->data;
     free(deleteNode);
-    printf("Deleted %d at random!\n", val);
+    printf("Deleted %d at position %d!\n", val, pos);
 }
 // delete operations
 

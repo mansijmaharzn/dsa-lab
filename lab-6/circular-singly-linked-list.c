@@ -134,7 +134,7 @@ void deleteAtEnd() {
     if (head->next == head) { // if the list has only one node
         deleteNode = head;
         val = deleteNode->data;
-        head == NULL; // now the list is empty
+        head = NULL; // now the list is empty
         free(deleteNode);
     } else {
         node* temp = head;

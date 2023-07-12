@@ -1,4 +1,4 @@
-//recursive function to sum till n number
+// recursive function to sum till n number
 #include<stdio.h>
 
 

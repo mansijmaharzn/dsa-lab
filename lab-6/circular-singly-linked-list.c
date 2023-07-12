@@ -217,7 +217,7 @@ int main() {
         switch(firstChoice) {
             // insert operations
             case 1:
-                printf("1. At Beginning\t2. At Random\t3. At End\t4. Exit\n> ");
+                printf("1. At Beginning\t2. At Random\t3. At End\n> ");
                 scanf("%d", &secondChoice);
                 
                 printf("Enter value to insert: ");

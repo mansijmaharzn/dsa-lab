@@ -1,4 +1,3 @@
-// this is remaining
 #include<stdio.h>
 #include<stdlib.h>
 

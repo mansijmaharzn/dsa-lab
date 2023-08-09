@@ -33,9 +33,6 @@ git clone https://github.com/mansijmaharzn/dsa-lab
 git pull upstream main
 ```
 
-<br />
-
-
 ---
 [Stack]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-1
 [Linear Queue]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-2

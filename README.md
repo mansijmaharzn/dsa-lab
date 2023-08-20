@@ -28,7 +28,7 @@ git clone https://github.com/mansijmaharzn/dsa-lab
 
 ### Updating
 ```
-git pull upstream main
+git pull upstream master
 ```
 
 ---

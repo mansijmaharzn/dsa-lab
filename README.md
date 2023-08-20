@@ -18,6 +18,7 @@ A repository to store Data Structure and Algorithm Lab solutions
 |   **10**     | [Queue Using Linked List]     | **Completed** |
 |   **11**     | [Binary Search Tree]          | **Completed** |
 |   **12**     | [Sorting]                     | **Completed** |
+|   **13**     | [Searching]                   | **Completed** |
 
 <br />
 
@@ -44,3 +45,4 @@ git pull upstream master
 [Queue Using Linked List]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-10
 [Binary Search Tree]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-11
 [Sorting]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-12
+[Searching]: https://github.com/mansijmaharzn/dsa-lab/tree/master/lab-13

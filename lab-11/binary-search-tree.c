@@ -34,6 +34,51 @@ node* insert(node* root, int key) {
 }
 
 
+// Function to find the minimum value node in a BST
+node* findMin(node* node) {
+    while (node->left != NULL)
+        node = node->left;
+    return node;
+}
+
+
+node* deleteNode(node* root, int key) {
+    if (root == NULL) return root;
+
+    // If the key is smaller than the root's key, go left
+    if (key < root->data)
+        root->left = deleteNode(root->left, key);
+
+    // If the key is larger than the root's key, go right
+    else if (key > root->data)
+        root->right = deleteNode(root->right, key);
+
+    // If the key is the same as the root's key, this is the node to be deleted
+    else {
+        // Node with only one child or no child
+        if (root->left == NULL) {
+            node* temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Node with two children, get the in-order successor (smallest in the right subtree)
+        node* temp = findMin(root->right);
+
+        // Copy the in-order successor's content to this node
+        root->data = temp->data;
+
+        // Delete the in-order successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+
 void inorderTraversal(node* root) {
     if (root) {
         inorderTraversal(root->left);
@@ -66,7 +111,7 @@ int main() {
     int choice, key;
 
     do {
-        printf("1. Insert\t2. Inorder Traversal\t3. Preorder Traversal\n4. Postorder Traversal\t5. Exit\t> ");
+        printf("1. Insert\t2. Delete\n3. Inorder Traversal\t4. Preorder Traversal\t5. Postorder Traversal\n6. Exit\t> ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -78,31 +123,37 @@ int main() {
                 break;
 
             case 2:
+                printf("Enter the key to delete: ");
+                scanf("%d", &key);
+                root = deleteNode(root, key);
+                break;
+
+            case 3:
                 printf("Inorder Traversal: ");
                 inorderTraversal(root);
                 printf("\n");
                 break;
 
-            case 3:
+            case 4:
                 printf("Preorder Traversal: ");
                 preorderTraversal(root);
                 printf("\n");
                 break;
 
-            case 4:
+            case 5:
                 printf("Postorder Traversal: ");
                 postorderTraversal(root);
                 printf("\n");
                 break;
 
-            case 5:
+            case 6:
                 printf("Exiting...\n");
                 break;
 
             default:
                 printf("Invalid choice. Please try again.\n");
         }
-    } while(choice != 5);
+    } while(choice != 6);
 
     return 0;
 }

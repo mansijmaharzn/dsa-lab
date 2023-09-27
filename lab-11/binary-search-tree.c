@@ -46,11 +46,11 @@ node* deleteNode(node* root, int key) {
     if (root == NULL) return root;
 
     // If the key is smaller than the root's key, go left
-    if (key < root->data)
+    if (key < root->key)
         root->left = deleteNode(root->left, key);
 
     // If the key is larger than the root's key, go right
-    else if (key > root->data)
+    else if (key > root->key)
         root->right = deleteNode(root->right, key);
 
     // If the key is the same as the root's key, this is the node to be deleted
@@ -70,10 +70,10 @@ node* deleteNode(node* root, int key) {
         node* temp = findMin(root->right);
 
         // Copy the in-order successor's content to this node
-        root->data = temp->data;
+        root->key = temp->key;
 
         // Delete the in-order successor
-        root->right = deleteNode(root->right, temp->data);
+        root->right = deleteNode(root->right, temp->key);
     }
     return root;
 }

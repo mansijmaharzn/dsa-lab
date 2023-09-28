@@ -112,7 +112,7 @@ void deleteAtBeginning() {
         deleteNode = head;
         head = deleteNode->next;
         head->prev = deleteNode->prev;
-        head->prev->next = head;
+        deleteNode->prev->next = head;
         val = deleteNode->data;
     }
 

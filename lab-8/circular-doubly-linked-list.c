@@ -49,8 +49,8 @@ void insertAtEnd(int val) {
     }
 
     if (head == NULL) {
-        newNode->prev = newNode->next = head;
         head = newNode;
+        newNode->prev = newNode->next = head;
     } else {
         newNode->next = head;
         newNode->prev = head->prev;
